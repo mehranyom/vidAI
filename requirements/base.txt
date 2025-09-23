@@ -7,3 +7,5 @@ djangorestframework==3.16.1
 pip-chill==1.0.3
 pip-tools==7.5.0
 redis==6.4.0
+yt-dlp==2025.9.23
+ffmpeg-python==0.2.0
