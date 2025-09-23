@@ -22,4 +22,4 @@ credentials/*.json
 
 .idea
 
-../credentials/*.json
+credentials/*.json
