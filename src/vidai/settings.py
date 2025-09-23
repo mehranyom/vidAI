@@ -127,7 +127,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 GS_BUCKET_NAME = 'vidai-cloud-storage'
 GOOGLE_APPLICATION_CREDENTIALS = (
                             Path.cwd()
-                            .parent
                             .joinpath('credentials', 'viadai-67d3aa9f083b.json')
 )
 
