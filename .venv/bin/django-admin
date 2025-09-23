@@ -1,4 +1,4 @@
-#!/Users/armanfayyazi/Desktop/Folders/vidAI/.venv/bin/python3
+#!/home/mehran/Desktop/Projects/vidAI/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

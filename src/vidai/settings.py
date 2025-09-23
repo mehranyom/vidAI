@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'vidapp.apps.VidappConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,38 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GS_BUCKET_NAME = 'vidai-cloud-storage'
+GOOGLE_APPLICATION_CREDENTIALS = (
+                            Path.cwd()
+                            .parent
+                            .joinpath('credentials', 'viadai-67d3aa9f083b.json')
+)
+
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    GOOGLE_APPLICATION_CREDENTIALS
+)
+
+GS_LOCATION = 'media'
+
+GS_FILE_OVERWRITE = False
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.gcloud.GoogleCloudStorage",
+        "OPTIONS": {
+            "bucket_name": GS_BUCKET_NAME,
+            "credentials": GS_CREDENTIALS,
+            "location": GS_LOCATION,         # omit if not using a prefix
+            "file_overwrite": GS_FILE_OVERWRITE,
+        },
+    },
+    # Keep staticfiles local unless you explicitly want GCS for static too.
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
+# MEDIA_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
+# if "GS_LOCATION" in globals() and GS_LOCATION:
+#     MEDIA_URL = f"{MEDIA_URL}{GS_LOCATION}/"  
