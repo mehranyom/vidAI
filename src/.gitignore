@@ -21,3 +21,5 @@ media/
 credentials/*.json
 
 .idea
+
+credentials/*.json
