@@ -1,9 +1,9 @@
 from celery import shared_task
-from .models import Video
 import yt_dlp
 import os
 from typing import Optional
 from collections.abc import Mapping
+from .custom_pp import PP_Store_To_GCS
 
 
 def yt_extract_meta_data(url: str) -> Optional[Mapping]:
@@ -30,4 +30,11 @@ def yt_extract_meta_data(url: str) -> Optional[Mapping]:
     }
 
 @shared_task
-def 
+def yt_download(url : str) -> None:
+    ydl_opts = {
+        'quite' : True,
+        'verbose' : False,
+        'noplaylist' : True,
+        'skip_download' : True,
+        'no_warnings' : True
+    }
