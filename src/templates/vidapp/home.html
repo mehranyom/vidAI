@@ -8,10 +8,11 @@
 <body>
     <p>hello world</p>
     <p>{{ list_ }}</p>
-    <form >
+    <form method="post" > {% csrf_token %}
         {% for item in form %}
             {{ item }}
         {% endfor %}
+        <input type="submit" value="Submit">
     </form>
     
 </body>

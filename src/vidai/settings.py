@@ -154,6 +154,6 @@ STORAGES = {
     },
 }
 
-# MEDIA_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
-# if "GS_LOCATION" in globals() and GS_LOCATION:
-#     MEDIA_URL = f"{MEDIA_URL}{GS_LOCATION}/"  
+
+CELERY_BROKER_URL = 'redis://localhost/0'
+
