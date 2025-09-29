@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import UrlForm
 from .celery.tasks import yt_download
@@ -12,11 +12,12 @@ def index(request):
         
         if s_form.is_valid():
             url = s_form.data.get('youtube_url')
-            yt_download.delay(url)
-            return HttpResponse('thanks')
+            return redirect("progress", {'url' : url})
     else:
         form = UrlForm()
         return render(request, 'vidapp/home.html', {'form' : form})
 
-
+def progress(request, url:str):
+    yt_download.delay(url)
+    return HttpResponse('thanks')
     
