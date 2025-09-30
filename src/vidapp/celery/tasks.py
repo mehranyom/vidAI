@@ -18,15 +18,15 @@ def yt_download(url : str) -> None:
             'no_warnings' : True,
             'format' : 'bestvideo*+bestaudio/best',
             'merge_output_format' : 'mp4',
-            'outtmpl' : os.path.join(tmpdir, '%(title)s-%(id)s.%(ext)s'),
+            'outtmpl' : os.path.join(tmpdir, '%(id)s.%(ext)s'),
             'noplaylist': True,
             'skip_download' : False,
-            "http_headers": {                    # real browser headers
+            "http_headers": {                   
                         "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                        "AppleWebKit/537.36 (KHTML, like Gecko) "
                        "Chrome/124.0.0.0 Safari/537.36"),
                         "Accept-Language": "en-US,en;q=0.9",
-    },
+                            },
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:

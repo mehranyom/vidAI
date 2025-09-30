@@ -12,12 +12,16 @@ def index(request):
         
         if s_form.is_valid():
             url = s_form.data.get('youtube_url')
-            return redirect("progress", {'url' : url})
+            yt_id = url.split('?v=')[-1]
+            return redirect("vidownload", id=yt_id)
+            # yt_download.delay(url)
+            # return HttpResponse('thanks')
     else:
         form = UrlForm()
         return render(request, 'vidapp/home.html', {'form' : form})
 
-def progress(request, url:str):
+def progress(request, id:str):
+    url = 'https://www.youtube.com/watch?v=' + id
     yt_download.delay(url)
     return HttpResponse('thanks')
     

@@ -7,7 +7,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 def user_directory_path(instanse, filename):
-    return f"{getattr(instanse, 'user_id', 'annon')}/{instanse.created_at:%Y/%m/%d}/{uuid.uuid4().hex}/{filename}"
+    return f"{getattr(instanse, 'user_id', 'annon')}/{instanse.created_at:%Y/%m/%d}/{instanse.youtube_id}/{filename}"
 
 
 class Video(models.Model):
